@@ -3,7 +3,7 @@ import datetime
 import requests
 import io
 import pandas as pd
-from google.cloud import storage
+# from google.cloud import storage
 from params import *
 from PIL import Image
 
@@ -16,13 +16,13 @@ st.set_page_config(page_title="Leukemia Predictor", page_icon="🩸", layout="ce
 st.title("🩸 Leukemia Image Classification (MVP)")
 st.caption("Upload a microscope image → API → prediction")
 
-client = storage.Client()
-bucket = client.bucket(BUCKET_NAME)
-blobs_list = list(bucket.list_blobs(prefix="models/"))
-sorted_blobs = sorted(blobs_list, key=lambda x: x.updated, reverse=True)
-list_of_blobs = [blob.name for blob in sorted_blobs]
-selected_model = st.selectbox("**Choose the model to be used**" + "\n\n" + "*(list sorted descending by model deployment date - latest model is preselected)*", list_of_blobs)
-data_to_send = {"option": selected_model}
+# client = storage.Client()
+# bucket = client.bucket(BUCKET_NAME)
+# blobs_list = list(bucket.list_blobs(prefix="models/"))
+# sorted_blobs = sorted(blobs_list, key=lambda x: x.updated, reverse=True)
+# list_of_blobs = [blob.name for blob in sorted_blobs]
+# selected_model = st.selectbox("**Choose the model to be used**" + "\n\n" + "*(list sorted descending by model deployment date - latest model is preselected)*", list_of_blobs)
+data_to_send = {"option": "just a test string"}
 
 file = st.file_uploader("Upload JPG/PNG" + "\n\n" +":red[(only upload B/W images in combination with a 'BW' model selection above. Processing B/W images in models trained on color images might lead to wrong classifications.)]", type=["png","jpg","jpeg"])
 
