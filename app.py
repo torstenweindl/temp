@@ -2,6 +2,7 @@ import os
 import streamlit as st
 import datetime
 import requests
+from IPython.display import display
 import io
 import pandas as pd
 from google.cloud import storage
@@ -59,6 +60,12 @@ if file:
             r.raise_for_status()
             data = r.json()
             st.write("This is the test output:")
+
+            binary_data = base64.b64decode(data["Cell 0"]["image"])
+            image_stream = io.BytesIO(binary_data)
+            image = Image.open(image_stream)
+            display(image)
+          
             st.write(data)
             # plt.imshow(data[1])
             # plt.show()
