@@ -79,15 +79,24 @@ if file:
 
             st.write(f"#### Here's what we found:")
 
-            cols = st.columns(3)
+            num_columns = 3
 
-            for i, (key, value) in enumerate(data.items()):
-              with cols[i]:
-                st.write(f"##### {key}")
-                binary_data = base64.b64decode(data[key]["image"])
-                image_stream = io.BytesIO(binary_data)
-                st.image(image_stream)
-                st.write(f"""**{data[key]["class index"]}** (certainty: **{data[key]["class index probability"]}**)""")
+            data_list = list(data.items())
+            total_items = len(data)
+            num_rows = math.ceil(total_items / num_columns)
+
+            for row in range(num_rows):
+              cols = st.columns(num_columns)
+              for col_index in range(num_columns):
+                item_index = row * num_columns + col_index
+                if item_index < total_items:
+                  key, value = data_list[item_index]
+                    with cols[col_index]:
+                      st.write(f"##### {key}")
+                      binary_data = base64.b64decode(value["image"])
+                      image_stream = io.BytesIO(binary_data)
+                      st.image(image_stream)
+                      st.write(f"""**{value["class index"]}** (certainty: **{value["class index probability"]}**)""")
             
               
                   
