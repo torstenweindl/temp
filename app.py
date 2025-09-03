@@ -16,6 +16,7 @@ API_URL = st.secrets['API_URL']
 BUCKET_NAME = st.secrets['BUCKET_NAME']
 
 print(BUCKET_NAME)
+print("test")
 
 # client = storage.Client()
 # bucket = client.bucket(BUCKET_NAME)
