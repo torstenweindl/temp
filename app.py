@@ -40,7 +40,7 @@ if file:
         image = Image.open(file)
         if image.mode is not 'RGB':
           image = image.convert('RGB')
-        st.image(image, caption="Preview", use_container_width=True, height=300)
+        st.image(image, caption="Preview", height=300)   # replaced "use_container_width=True"
         # plt.imshow(image)
         buf = io.BytesIO(); image.save(buf, format="JPEG"); buf.seek(0)
         # files_to_send = {"file": ("image.jpg", buf, "image/jpeg")}
