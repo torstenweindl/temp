@@ -109,8 +109,9 @@ if file:
               st.image(image_stream)
               st.write(f"""**{value["class index"]}**""")
               st.write(f"""(certainty: **{value["class index probability"]}**)""")
-
-      st.write(f"""**Model used for analysis:** {data['Cell 1']['model used']}""")
+      
+      st.write("")
+      st.write(f"""**Model used for detection:** {data['Cell 1']['model used']}""")
 
     except Exception as e:
          st.error(f"API error: {e}")
