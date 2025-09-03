@@ -14,12 +14,15 @@ import matplotlib.image as mpimg
 # API_URL = 'http://127.0.0.1:8000/segment/'  # API URL hardcoded to the local server for the time being
 API_URL = st.secrets['API_URL']
 BUCKET_NAME = st.secrets['BUCKET_NAME']
-GCP_PROJECT = st.secrets['GCP_PROJECT']
+# GCP_PROJECT = st.secrets['GCP_PROJECT']
 
 st.write(BUCKET_NAME)
 st.write("test")
 
-client = storage.Client()
+model_list = ['20250826-152119.keras','20250827-141827.keras','20250828-082537.keras','20250828-083337.keras','20250828-083558.keras','20250828-154636_model BW.keras','20250829-130807_model BW.keras',
+              '20250902-193012_model BW.keras','20250902-193056_ModelTrainedOnSegData_simpleCNN_v1.keras','20250903-073842_ModelTrainedOnSegData_simpleCNN_v1.keras','20250903-091757_ModelTrainedOnSegData_simpleCNN_final.keras']
+
+# client = storage.Client()
 # bucket = client.bucket(BUCKET_NAME)
 # blobs_list = list(bucket.list_blobs(prefix="models/"))
 # sorted_blobs = sorted(blobs_list, key=lambda x: x.updated, reverse=True)
