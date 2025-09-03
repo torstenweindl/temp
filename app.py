@@ -68,7 +68,7 @@ if file:
             3: 'Monocyte',
             4: 'Myeloblast',
             5: 'Seg Neutrophil',
-            6: 'Kategorie F'
+            6: 'Red Blood Cell'
             }
 
             for cell in data:
@@ -77,11 +77,14 @@ if file:
               recoded_value = class_mapping.get(original_value, 'Unknown')
               inner_dict['class index'] = recoded_value
 
+            st.write(f"#### Analysis Results")
+          
             for cell in data:
+              st.write(f"##### {cell}")
               binary_data = base64.b64decode(data[cell]["image"])
               image_stream = io.BytesIO(binary_data)
               st.image(image_stream)
-              st.write(f"{cell}: This cell is a {data[cell]["class index"]} with {data[cell]["class index probability"]} probability.")
+              st.write(f"""**{data[cell]["class index"]}** with **{data[cell]["class index probability"]} probability""")
 
           
             # st.write(data)
