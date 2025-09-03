@@ -14,6 +14,7 @@ import matplotlib.image as mpimg
 # API_URL = 'http://127.0.0.1:8000/segment/'  # API URL hardcoded to the local server for the time being
 API_URL = st.secrets['API_URL']
 BUCKET_NAME = st.secrets['BUCKET_NAME']
+GCP_PROJECT = st.secrets['GCP_PROJECT']
 
 st.write(BUCKET_NAME)
 st.write("test")
