@@ -38,7 +38,7 @@ if file:
 
     if st.button("Start analysis"):
         status_placeholder = st.empty()
-        status_placeholder.text("Segmenting in the works ... please stand by.")
+        status_placeholder.text("8 mighty CPUs are giving their best for you now - please stand by for ~1m.")
         image = Image.open(file)
 
         original_width, original_height = image.size
@@ -84,7 +84,7 @@ if file:
               binary_data = base64.b64decode(data[cell]["image"])
               image_stream = io.BytesIO(binary_data)
               st.image(image_stream)
-              st.write(f"""**{data[cell]["class index"]}** (certainty: **{data[cell]["class index probability"]}**""")
+              st.write(f"""**{data[cell]["class index"]}** (certainty: **{data[cell]["class index probability"]}**)""")
 
           
             # st.write(data)
