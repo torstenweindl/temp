@@ -1,20 +1,24 @@
+import os
 import streamlit as st
 import datetime
 import requests
 import io
 import pandas as pd
-# from google.cloud import storage
+from google.cloud import storage
 from params import *
 from PIL import Image
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 
 # API_URL = st.secrets["API_URL"]    # API_URL stored in a local "secrets" file; in production, API_URL will be stored in Streamlit's secrets section in the web interface
-# API_URL = 'http://127.0.0.1:8000/uploadfile/'  # API URL hardcoded to the local server for the time being
-API_URL = st.secrets["API_URL"]
+# API_URL = 'http://127.0.0.1:8000/segment/'  # API URL hardcoded to the local server for the time being
+API_URL = st.secrets['API_URL']
+BUCKET_NAME = st.secrets['BUCKET_NAME']
+# GCP_PROJECT = st.secrets['GCP_PROJECT']
 
 
-st.set_page_config(page_title="Leukemia Predictor", page_icon="🩸", layout="centered")
-st.title("🩸 Leukemia Image Classification (MVP)")
-st.caption("Upload a microscope image → API → prediction")
+model_list = ['20250826-152119.keras','20250827-141827.keras','20250828-082537.keras','20250828-083337.keras','20250828-083558.keras','20250828-154636_model BW.keras','20250829-130807_model BW.keras',
+              '20250902-193012_model BW.keras','20250902-193056_ModelTrainedOnSegData_simpleCNN_v1.keras','20250903-073842_ModelTrainedOnSegData_simpleCNN_v1.keras','20250903-091757_ModelTrainedOnSegData_simpleCNN_final.keras']
 
 # client = storage.Client()
 # bucket = client.bucket(BUCKET_NAME)
@@ -22,69 +26,31 @@ st.caption("Upload a microscope image → API → prediction")
 # sorted_blobs = sorted(blobs_list, key=lambda x: x.updated, reverse=True)
 # list_of_blobs = [blob.name for blob in sorted_blobs]
 # selected_model = st.selectbox("**Choose the model to be used**" + "\n\n" + "*(list sorted descending by model deployment date - latest model is preselected)*", list_of_blobs)
-data_to_send = {"option": "just a test string"}
+# data_to_send = {"option": selected_model}
 
-file = st.file_uploader("Upload JPG/PNG" + "\n\n" +":red[(only upload B/W images in combination with a 'BW' model selection above. Processing B/W images in models trained on color images might lead to wrong classifications.)]", type=["png","jpg","jpeg"])
+# data_to_send = {"option_1": "no value selected", "option_2": "no value selected", "option_3": "no value selected"}
 
-# def is_image_bw_by_pixel(file):
-#     """
-#     Checks if a given picture is *really* BW by analyzing every pixel (image.mode funtion often not reliable)
-#     """
-#     try:
-#         with Image.open(file) as img:
-#             # Converting into RGB for analysis
-#             rgb_img = img.convert('RGB')
-#             pixels = list(rgb_img.getdata())
-
-#             # Check every pixel
-#             for r, g, b in pixels:
-#                 if not (r == g == b):
-#                     return False  # At least one pixel has colors
-
-#             return True  # All pixels have the same RGB value (greyscale)
-#     except IOError:
-#         print("File not found or not a image")
-#         return False
+file = st.file_uploader("Upload JPG/PNG - and this is just a random text", type=["png","jpg","jpeg"])
 
 if file:
-    image = Image.open(file)
-    st.image(image, caption="Preview", use_container_width=True)
-    # image_mode_truth = is_image_bw_by_pixel(file)
-    image_mode = image.mode
-    image_format = image.format
 
-#     if "BW" in selected_model:
-#         image = image.convert('L')  # Converting to greyscale in any case, as detection via image.mode is not always reliable
-#         jpg_stream = io.BytesIO()
-#         image.save(jpg_stream, format='JPEG')
-#         user_feedback = "*Note: You selected a model trained on greyscale images. Your uploaded image was automatically converted to greyscale (if not already the case).*"
-
-#     else:
-#         if image.mode in ('1','L'):
-#             user_feedback = "*Note: You uploaded a BW / greyscale image. Note that your selected model may have been trained on color images.*"
-
-#         else:
-#             if image.format in ('PNG','png'):
-#                 image = image.convert('RGB')
-#                 jpg_stream = io.BytesIO()
-#                 image.save(jpg_stream, format='JPEG')
-#                 user_feedback = "*Note: Uploaded PNG image was automatically converted to JPG.*"
-#             else:
-#                 user_feedback = "Image processed."
-
-    if st.button("Predict"):
+    if st.button("Segment"):
         status_placeholder = st.empty()
-        status_placeholder.text("Processing... please stand by.")
+        status_placeholder.text("Segmenting in the works ... please stand by.")
+        image = Image.open(file)
+        st.image(image, caption="Preview", use_container_width=True)
+        # plt.imshow(image)
         buf = io.BytesIO(); image.save(buf, format="JPEG"); buf.seek(0)
+        # files_to_send = {"file": ("image.jpg", buf, "image/jpeg")}
 
         try:
-            r = requests.post(API_URL, files={"file": ("image.jpg", buf, "image/jpeg")}, data=data_to_send, timeout=20)
+            r = requests.post(API_URL, files={"file": ("image.jpg", buf, "image/jpeg")}, timeout=600)
             r.raise_for_status()
             data = r.json()
-            status_placeholder.markdown(user_feedback)
-            st.write(f"""##### This image belongs to class **{data['class index']}**.""")
-            st.write(f"###### Probabilities:")
-            st.text(f"Class 1 (Basophil): {data['class 1']} \nClass 2 (Erythroblast): {data['class 2']} \nClass 3 (Monocyte): {data['class 3']} \nClass 4 (Myeloblast): {data['class 4']} \nClass 5 (Seg Neutrophil): {data['class 5']}")
+            st.write("This is the test output:")
+            st.write(data)
+            # plt.imshow(data[1])
+            # plt.show()
 
         except Exception as e:
            st.error(f"API error: {e}")
