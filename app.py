@@ -127,7 +127,7 @@ if file:
             # plt.imshow(data[1])
             # plt.show()
 
-      except Exception as e:
+    except Exception as e:
          st.error(f"API error: {e}")
 else:
     st.info("Please upload an image to start.")
