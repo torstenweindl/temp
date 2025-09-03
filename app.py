@@ -60,6 +60,7 @@ if file:
     try:
       r = requests.post(API_URL, files={"file": ("image.jpg", buf, "image/jpeg")}, timeout=600)
       r.raise_for_status()
+      status_placeholder.text(f"Done.")
       data = r.json()
 
       class_mapping = {
@@ -80,13 +81,9 @@ if file:
       classes = [inner_dict['class index'] for inner_dict in data.values()]
       classes_count = Counter(classes)
       classes_count_sorted = sorted(classes_count.items(), key=lambda item: item[1], reverse=True)
-      st.write(classes_count_sorted)
 
       total_items = len(data)
       st.write(f"#### We found {total_items} cells:")
-
-      # for i in classes_count_sorted:
-       # st.write(f"""{i[1]} x {i[0]} ({i[1] / len(classes_count_sorted)} of all cells""")
 
       bullet_list = ""
       for i in classes_count_sorted:
@@ -113,20 +110,6 @@ if file:
               st.image(image_stream)
               st.write(f"""**{value["class index"]}**""")
               st.write(f"""(certainty: **{value["class index probability"]}**)""")
-            
-              
-                  
-            # for cell in data:
-            #   st.write(f"##### {cell}")
-            #   binary_data = base64.b64decode(data[cell]["image"])
-            #   image_stream = io.BytesIO(binary_data)
-            #   st.image(image_stream)
-            #   st.write(f"""**{data[cell]["class index"]}** (certainty: **{data[cell]["class index probability"]}**)""")
-
-          
-            # st.write(data)
-            # plt.imshow(data[1])
-            # plt.show()
 
     except Exception as e:
          st.error(f"API error: {e}")
