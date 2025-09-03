@@ -40,7 +40,7 @@ if file:
         image = Image.open(file)
         st.image(image, caption="Preview", use_container_width=True)
         # plt.imshow(image)
-        # buf = io.BytesIO(); image.save(buf, format="JPEG"); buf.seek(0)
+        buf = io.BytesIO(); image.save(buf, format="JPEG"); buf.seek(0)
         # files_to_send = {"file": ("image.jpg", buf, "image/jpeg")}
 
         try:
