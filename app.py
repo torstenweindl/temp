@@ -46,31 +46,31 @@ file = st.file_uploader("Upload JPG/PNG" + "\n\n" +":red[(only upload B/W images
 #         print("File not found or not a image")
 #         return False
 
-if file:
-    image = Image.open(file)
-    st.image(image, caption="Preview", use_container_width=True)
-    # image_mode_truth = is_image_bw_by_pixel(file)
-    image_mode = image.mode
-    image_format = image.format
+# if file:
+#     image = Image.open(file)
+#     st.image(image, caption="Preview", use_container_width=True)
+#     # image_mode_truth = is_image_bw_by_pixel(file)
+#     image_mode = image.mode
+#     image_format = image.format
 
-    if "BW" in selected_model:
-        image = image.convert('L')  # Converting to greyscale in any case, as detection via image.mode is not always reliable
-        jpg_stream = io.BytesIO()
-        image.save(jpg_stream, format='JPEG')
-        user_feedback = "*Note: You selected a model trained on greyscale images. Your uploaded image was automatically converted to greyscale (if not already the case).*"
+#     if "BW" in selected_model:
+#         image = image.convert('L')  # Converting to greyscale in any case, as detection via image.mode is not always reliable
+#         jpg_stream = io.BytesIO()
+#         image.save(jpg_stream, format='JPEG')
+#         user_feedback = "*Note: You selected a model trained on greyscale images. Your uploaded image was automatically converted to greyscale (if not already the case).*"
 
-    else:
-        if image.mode in ('1','L'):
-            user_feedback = "*Note: You uploaded a BW / greyscale image. Note that your selected model may have been trained on color images.*"
+#     else:
+#         if image.mode in ('1','L'):
+#             user_feedback = "*Note: You uploaded a BW / greyscale image. Note that your selected model may have been trained on color images.*"
 
-        else:
-            if image.format in ('PNG','png'):
-                image = image.convert('RGB')
-                jpg_stream = io.BytesIO()
-                image.save(jpg_stream, format='JPEG')
-                user_feedback = "*Note: Uploaded PNG image was automatically converted to JPG.*"
-            else:
-                user_feedback = "Image processed."
+#         else:
+#             if image.format in ('PNG','png'):
+#                 image = image.convert('RGB')
+#                 jpg_stream = io.BytesIO()
+#                 image.save(jpg_stream, format='JPEG')
+#                 user_feedback = "*Note: Uploaded PNG image was automatically converted to JPG.*"
+#             else:
+#                 user_feedback = "Image processed."
 
     if st.button("Predict"):
         status_placeholder = st.empty()
