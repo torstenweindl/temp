@@ -38,7 +38,9 @@ if file:
         status_placeholder = st.empty()
         status_placeholder.text("Segmenting in the works ... please stand by.")
         image = Image.open(file)
-        st.image(image, caption="Preview", use_container_width=True, width=400)
+        if image.mode is not 'RGB':
+          image = image.convert('RGB')
+        st.image(image, caption="Preview", use_container_width=True, height=300)
         # plt.imshow(image)
         buf = io.BytesIO(); image.save(buf, format="JPEG"); buf.seek(0)
         # files_to_send = {"file": ("image.jpg", buf, "image/jpeg")}
