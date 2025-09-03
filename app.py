@@ -4,6 +4,7 @@ import datetime
 import requests
 from IPython.display import display
 import io
+import base64
 import pandas as pd
 from google.cloud import storage
 from params import *
