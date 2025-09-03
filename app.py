@@ -87,8 +87,8 @@ if file:
             total_items = len(data)
             st.write(f"#### We found {total_items} cells:")
 
-            # for i in classes_count_sorted:
-             # st.write(f"""{classes_count_sorted[i][1]} x {classes_count_sorted[i][0]} ({classes_count_sorted[i][1] / len(classes_count_sorted)} of all cells""")
+            for i in classes_count_sorted:
+             st.write(f"""{i[1]} x {i[0]} ({i[1] / len(classes_count_sorted)} of all cells""")
 
             st.write(f"#### Cells in detail:")
             
