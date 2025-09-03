@@ -33,7 +33,7 @@ model_list = ['20250826-152119.keras','20250827-141827.keras','20250828-082537.k
 
 # data_to_send = {"option_1": "no value selected", "option_2": "no value selected", "option_3": "no value selected"}
 
-file = st.file_uploader("Upload JPG/PNG", type=["png","jpg","jpeg"])
+file = st.file_uploader("Upload JPG/PNG of a blood smear", type=["png","jpg","jpeg"])
 
 if file:
 
@@ -78,12 +78,12 @@ if file:
               recoded_value = class_mapping.get(original_value, 'Unknown')
               inner_dict['class index'] = recoded_value
 
-            st.write(f"#### Here's what we found:")
+            total_items = len(data)
+            st.write(f"#### We found {total_items} cells:")
 
             num_columns = 3
 
             data_list = list(data.items())
-            total_items = len(data)
             num_rows = math.ceil(total_items / num_columns)
 
             for row in range(num_rows):
