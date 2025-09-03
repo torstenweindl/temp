@@ -46,12 +46,12 @@ file = st.file_uploader("Upload JPG/PNG" + "\n\n" +":red[(only upload B/W images
 #         print("File not found or not a image")
 #         return False
 
-# if file:
-#     image = Image.open(file)
-#     st.image(image, caption="Preview", use_container_width=True)
-#     # image_mode_truth = is_image_bw_by_pixel(file)
-#     image_mode = image.mode
-#     image_format = image.format
+if file:
+    image = Image.open(file)
+    st.image(image, caption="Preview", use_container_width=True)
+    # image_mode_truth = is_image_bw_by_pixel(file)
+    image_mode = image.mode
+    image_format = image.format
 
 #     if "BW" in selected_model:
 #         image = image.convert('L')  # Converting to greyscale in any case, as detection via image.mode is not always reliable
