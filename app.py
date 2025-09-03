@@ -88,7 +88,7 @@ if file:
             st.write(f"#### We found {total_items} cells:")
 
             for i in classes_count_sorted:
-              st.write(f"{classes_count_sorted[i][1]} x {classes_count_sorted[i][0]}
+              st.write(f"{classes_count_sorted[i][1]} x {classes_count_sorted[i][0]}")
 
             st.write(f"#### Cells in detail:")
             
