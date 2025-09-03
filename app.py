@@ -63,9 +63,13 @@ if file:
             st.write("This is the test output:")
 
             binary_data = base64.b64decode(data["Cell 0"]["image"])
+            st.write("Binary image data written")
             image_stream = io.BytesIO(binary_data)
+            st.write("Image stream created")
             image = Image.open(image_stream)
+            st.write("Image opened")
             display(image)
+            st.write("Image displayed")
           
             st.write(data)
             # plt.imshow(data[1])
