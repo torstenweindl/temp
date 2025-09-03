@@ -91,12 +91,12 @@ if file:
                 item_index = row * num_columns + col_index
                 if item_index < total_items:
                   key, value = data_list[item_index]
-                    with cols[col_index]:
-                      st.write(f"##### {key}")
-                      binary_data = base64.b64decode(value["image"])
-                      image_stream = io.BytesIO(binary_data)
-                      st.image(image_stream)
-                      st.write(f"""**{value["class index"]}** (certainty: **{value["class index probability"]}**)""")
+                  with cols[col_index]:
+                    st.write(f"##### {key}")
+                    binary_data = base64.b64decode(value["image"])
+                    image_stream = io.BytesIO(binary_data)
+                    st.image(image_stream)
+                    st.write(f"""**{value["class index"]}** (certainty: **{value["class index probability"]}**)""")
             
               
                   
