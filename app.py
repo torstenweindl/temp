@@ -60,16 +60,16 @@ if file:
             r = requests.post(API_URL, files={"file": ("image.jpg", buf, "image/jpeg")}, timeout=600)
             r.raise_for_status()
             data = r.json()
-            st.write("This is the test output:")
+            # st.write("This is the test output:")
 
-            binary_data = base64.b64decode(data["Cell 0"]["image"])
-            image_stream = io.BytesIO(binary_data)
-            st.image(image_stream)
-
-            st.write(f"This cell is a {data["Cell 0"]["class index"]} with {data["Cell 0"]["class index probability"]} probability.")
+            for cell in data:
+              binary_data = base64.b64decode(data[cell]["image"])
+              image_stream = io.BytesIO(binary_data)
+              st.image(image_stream)
+              st.write(f"This cell is a {data[cell]["class index"]} with {data[cell]["class index probability"]} probability.")
 
           
-            st.write(data)
+            # st.write(data)
             # plt.imshow(data[1])
             # plt.show()
 
