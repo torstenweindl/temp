@@ -108,7 +108,7 @@ if file:
               image_stream = io.BytesIO(binary_data)
               st.image(image_stream)
               st.write(f"""**{value["class index"]}**""")
-              st.write(f"""(certainty: **{value["class index probability"]}**)""")
+              st.write(f"""(confidence: **{value["class index probability"]}**)""")
       
       st.write("")
       st.write(f"""**Model used for detection:** {data['Cell 1']['model used']}""")
