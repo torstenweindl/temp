@@ -5,7 +5,7 @@ import requests
 import io
 import pandas as pd
 from google.cloud import storage
-# from params import *
+from params import *
 from PIL import Image
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
