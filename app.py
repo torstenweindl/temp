@@ -14,6 +14,14 @@ import matplotlib.image as mpimg
 # API_URL = 'http://127.0.0.1:8000/segment/'  # API URL hardcoded to the local server for the time being
 API_URL = st.secrets['API_URL']
 
+client = storage.Client()
+bucket = client.bucket(BUCKET_NAME)
+blobs_list = list(bucket.list_blobs(prefix="models/"))
+sorted_blobs = sorted(blobs_list, key=lambda x: x.updated, reverse=True)
+list_of_blobs = [blob.name for blob in sorted_blobs]
+selected_model = st.selectbox("**Choose the model to be used**" + "\n\n" + "*(list sorted descending by model deployment date - latest model is preselected)*", list_of_blobs)
+data_to_send = {"option": selected_model}
+
 file = st.file_uploader("Upload JPG/PNG", type=["png","jpg","jpeg"])
 
 if file:
