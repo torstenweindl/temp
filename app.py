@@ -82,13 +82,13 @@ if file:
             classes = [inner_dict['class index'] for inner_dict in data.values()]
             classes_count = Counter(classes)
             classes_count_sorted = sorted(classes_count.items(), key=lambda item: item[1], reverse=True)
-            # st.write(classes_count_sorted)
+            st.write(classes_count_sorted)
 
             total_items = len(data)
             st.write(f"#### We found {total_items} cells:")
 
-            for i in classes_count_sorted:
-              st.write(f"{classes_count_sorted[i][1]} x {classes_count_sorted[i][0]} ({classes_count_sorted[i][1] / len(classes_count_sorted)} of all cells")
+            # for i in classes_count_sorted:
+             # st.write(f"""{classes_count_sorted[i][1]} x {classes_count_sorted[i][0]} ({classes_count_sorted[i][1] / len(classes_count_sorted)} of all cells""")
 
             st.write(f"#### Cells in detail:")
             
