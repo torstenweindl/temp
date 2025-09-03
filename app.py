@@ -30,7 +30,7 @@ model_list = ['20250826-152119.keras','20250827-141827.keras','20250828-082537.k
 
 # data_to_send = {"option_1": "no value selected", "option_2": "no value selected", "option_3": "no value selected"}
 
-file = st.file_uploader("Upload JPG/PNG - and this is just a random text", type=["png","jpg","jpeg"])
+file = st.file_uploader("Upload JPG/PNG", type=["png","jpg","jpeg"])
 
 if file:
 
@@ -38,7 +38,7 @@ if file:
         status_placeholder = st.empty()
         status_placeholder.text("Segmenting in the works ... please stand by.")
         image = Image.open(file)
-        st.image(image, caption="Preview", use_container_width=True)
+        st.image(image, caption="Preview", use_container_width=True, width=400)
         # plt.imshow(image)
         buf = io.BytesIO(); image.save(buf, format="JPEG"); buf.seek(0)
         # files_to_send = {"file": ("image.jpg", buf, "image/jpeg")}
