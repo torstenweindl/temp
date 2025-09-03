@@ -40,8 +40,12 @@ if file:
         image = Image.open(file)
 
         original_width, original_height = image.size
-        image_ratio = original_width / original_height
-        preview_image = image.resize((int(300*image_ratio),300))
+        if original_height > 400:
+          image_ratio = original_width / original_height
+          preview_image = image.resize((int(400*image_ratio),400))
+        else:
+          preview_image = image
+          
         
         if image.mode is not 'RGB':
           image = image.convert('RGB')
