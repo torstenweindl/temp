@@ -40,17 +40,18 @@ file = st.file_uploader("Upload JPG/PNG of a blood smear", type=["png","jpg","jp
 
 if file:
   image = Image.open(file)
+  buf = io.BytesIO(); image.save(buf, format="JPEG"); buf.seek(0)
   original_width, original_height = image.size
+  
   if original_height > 500:
     image_ratio = original_width / original_height
     preview_image = image.resize((int(500*image_ratio),500))
   else:
     preview_image = image
+  st.image(preview_image, caption="Preview")    # replaced "use_container_width=True"   
           
   if image.mode != 'RGB':
-    image = image.convert('RGB')
-    st.image(preview_image, caption="Preview")   # replaced "use_container_width=True"    
-    buf = io.BytesIO(); image.save(buf, format="JPEG"); buf.seek(0)
+    image = image.convert('RGB')  
 
   if st.button("Start analysis"):
     status_placeholder = st.empty()
