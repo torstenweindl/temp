@@ -39,7 +39,7 @@ if file:
 
     if st.button("Start analysis"):
         status_placeholder = st.empty()
-        status_placeholder.text("8 mighty CPUs are giving their best for you right now - please stand by for ~1m!")
+        status_placeholder.text("8 mighty CPUs are giving their best for you right now - please stand by for ~1m! Once processed, the results will show up below.")
         image = Image.open(file)
 
         original_width, original_height = image.size
