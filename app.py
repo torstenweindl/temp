@@ -40,10 +40,10 @@ if file:
         image = Image.open(file)
 
         original_width, original_height = image.size
-        if original_height > 500:
-          image_ratio = original_width / original_height
-          preview_image = image.resize((int(500*image_ratio),500))
-        else:
+        # if original_height > 500:
+        #   image_ratio = original_width / original_height
+        #   preview_image = image.resize((int(500*image_ratio),500))
+        # else:
           preview_image = image
           
         
