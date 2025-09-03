@@ -18,11 +18,7 @@ BUCKET_NAME = st.secrets['BUCKET_NAME']
 st.write(BUCKET_NAME)
 st.write("test")
 
-st.set_page_config(page_title="Leukemia Predictor", page_icon="🩸", layout="centered")
-st.title("🩸 Leukemia Image Classification (MVP)")
-st.caption("Upload a microscope image → API → prediction")
-
-# client = storage.Client()
+client = storage.Client()
 # bucket = client.bucket(BUCKET_NAME)
 # blobs_list = list(bucket.list_blobs(prefix="models/"))
 # sorted_blobs = sorted(blobs_list, key=lambda x: x.updated, reverse=True)
