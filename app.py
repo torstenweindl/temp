@@ -94,7 +94,7 @@ if file:
             for i in classes_count_sorted:
               bullet_list += f"{i[1]} x {i[0]} ({i[1] / len(classes_count_sorted)} of all cells\n"
 
-            st.markdown(bullet_list)
+            st.text(bullet_list)
 
             st.write(f"#### Cells in detail:")
             
