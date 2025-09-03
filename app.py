@@ -4,6 +4,7 @@ import datetime
 import requests
 from IPython.display import display
 import io
+from collections import Counter
 import base64
 import math
 import pandas as pd
@@ -39,7 +40,7 @@ if file:
 
     if st.button("Start analysis"):
         status_placeholder = st.empty()
-        status_placeholder.text("8 mighty CPUs are giving their best for you right now - please stand by for ~1m! Once processed, the results will show up below.")
+        status_placeholder.text("Please stand by for about ~1m! 8 mighty CPUs are giving their best for you right now. Once processed, the results will show up below.")
         image = Image.open(file)
 
         original_width, original_height = image.size
@@ -77,6 +78,11 @@ if file:
               original_value = inner_dict['class index']
               recoded_value = class_mapping.get(original_value, 'Unknown')
               inner_dict['class index'] = recoded_value
+
+            classes = [inner_dict['class index'] for inner_dict in data.values()]
+            classes_count = Counter(classes)
+            classes_count_sorted = sorted(classes_count.items(), key=lambda item: item[1], reverse=True)
+            st.write(classes_count_sorted)
 
             total_items = len(data)
             st.write(f"#### We found {total_items} cells:")
