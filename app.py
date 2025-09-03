@@ -55,7 +55,7 @@ if file:
 
   if st.button("Start analysis"):
     status_placeholder = st.empty()
-    status_placeholder.text(f"""Please stand by for about 1 minute.\n8 mighty CPUs are giving their best for you right now! ;) Once processed, the results will show up below.""")
+    status_placeholder.text(f"""8 mighty CPUs are having a look right now ;) - please stand by for about 1 minute.\nOnce processed, the results will show up below.""")
 
     try:
       r = requests.post(API_URL, files={"file": ("image.jpg", buf, "image/jpeg")}, timeout=600)
