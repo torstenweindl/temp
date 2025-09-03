@@ -15,8 +15,8 @@ import matplotlib.image as mpimg
 API_URL = st.secrets['API_URL']
 BUCKET_NAME = st.secrets['BUCKET_NAME']
 
-print(BUCKET_NAME)
-print("test")
+st.write(BUCKET_NAME)
+st.write("test")
 
 # client = storage.Client()
 # bucket = client.bucket(BUCKET_NAME)
