@@ -48,7 +48,7 @@ if file:
           preview_image = image
           
         
-        if image.mode is not 'RGB':
+        if image.mode != 'RGB':
           image = image.convert('RGB')
         st.image(preview_image, caption="Preview")   # replaced "use_container_width=True"
         # plt.imshow(image)
