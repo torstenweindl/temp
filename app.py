@@ -62,11 +62,26 @@ if file:
             data = r.json()
             # st.write("This is the test output:")
 
+            class_mapping = {
+            1: 'Basophil',
+            2: 'Erythroblast',
+            3: 'Monocyte',
+            4: 'Myeloblast',
+            5: 'Seg Neutrophil',
+            6: 'Kategorie F'
+            }
+
+            for cell in data:
+              inner_dict = data[cell]
+              original_value = inner_dict['class index']
+              recoded_value = class_mapping.get(original_value, 'Unknown')
+              inner_dict['class index'] = recoded_value
+
             for cell in data:
               binary_data = base64.b64decode(data[cell]["image"])
               image_stream = io.BytesIO(binary_data)
               st.image(image_stream)
-              st.write(f"This cell is a {data[cell]["class index"]} with {data[cell]["class index probability"]} probability.")
+              st.write(f"{cell}: This cell is a {data[cell]["class index"]} with {data[cell]["class index probability"]} probability.")
 
           
             # st.write(data)
