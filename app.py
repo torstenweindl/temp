@@ -44,7 +44,7 @@ if file:
         #   image_ratio = original_width / original_height
         #   preview_image = image.resize((int(500*image_ratio),500))
         # else:
-          preview_image = image
+        preview_image = image
           
         
         if image.mode is not 'RGB':
