@@ -97,7 +97,7 @@ if file:
                     binary_data = base64.b64decode(value["image"])
                     image_stream = io.BytesIO(binary_data)
                     st.image(image_stream)
-                    st.write(f"""**{value["class index"]}** (certainty: **{value["class index probability"]}**)""")
+                    st.write(f"""**{value["class index"]}**""" + \n + """(certainty: **{value["class index probability"]}**)""")
             
               
                   
