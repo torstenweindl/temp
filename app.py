@@ -31,6 +31,7 @@ model_list = ['20250826-152119.keras','20250827-141827.keras','20250828-082537.k
 data_to_send = {"option_1": "no value selected", "option_2": "no value selected", "option_3": "no value selected"}
 
 file = st.file_uploader("Upload JPG/PNG - and this is just a random text", type=["png","jpg","jpeg"])
+files_to_send = {"file": ("image.jpg", buf, "image/jpeg")}
 
 if file:
 
@@ -41,7 +42,7 @@ if file:
         buf = io.BytesIO(); image.save(buf, format="JPEG"); buf.seek(0)
 
         try:
-            r = requests.post(API_URL, files={"file": ("image.jpg", buf, "image/jpeg")}, data=data_to_send, timeout=600)
+            r = requests.post(API_URL, files=files_to_send, data=data_to_send, timeout=600)
             r.raise_for_status()
             data = r.json()
             st.write("This is the test output:")
