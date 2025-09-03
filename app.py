@@ -66,6 +66,8 @@ if file:
             image_stream = io.BytesIO(binary_data)
             st.image(image_stream)
 
+            st.write(f"This cell is a {data["Cell 0"]["class index"]} with {data["Cell 0"]["class index probability"]} probability.")
+
           
             st.write(data)
             # plt.imshow(data[1])
