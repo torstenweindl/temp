@@ -26,7 +26,7 @@ st.write("test")
 # selected_model = st.selectbox("**Choose the model to be used**" + "\n\n" + "*(list sorted descending by model deployment date - latest model is preselected)*", list_of_blobs)
 # data_to_send = {"option": selected_model}
 
-file = st.file_uploader("Upload JPG/PNG", type=["png","jpg","jpeg"])
+file = st.file_uploader("Upload JPG/PNG - and this is just a random text", type=["png","jpg","jpeg"])
 
 if file:
 
