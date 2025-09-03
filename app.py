@@ -110,6 +110,8 @@ if file:
               st.write(f"""**{value["class index"]}**""")
               st.write(f"""(certainty: **{value["class index probability"]}**)""")
 
+      st.write(f"""**Model used for analysis:** {data['Cell 1']['model used']}""")
+
     except Exception as e:
          st.error(f"API error: {e}")
 else:
