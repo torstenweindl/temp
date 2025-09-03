@@ -36,7 +36,7 @@ file = st.file_uploader("Upload JPG/PNG", type=["png","jpg","jpeg"])
 
 if file:
 
-    if st.button("Segment"):
+    if st.button("Start analysis"):
         status_placeholder = st.empty()
         status_placeholder.text("Segmenting in the works ... please stand by.")
         image = Image.open(file)
@@ -84,7 +84,7 @@ if file:
               binary_data = base64.b64decode(data[cell]["image"])
               image_stream = io.BytesIO(binary_data)
               st.image(image_stream)
-              st.write(f"""**{data[cell]["class index"]}** with **{data[cell]["class index probability"]} probability""")
+              st.write(f"""**{data[cell]["class index"]}** (certainty: **{data[cell]["class index probability"]}**""")
 
           
             # st.write(data)
