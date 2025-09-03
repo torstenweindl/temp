@@ -82,7 +82,7 @@ if file:
             cols = st.columns(3)
 
             for i, (key, value) in enumerate(data.items()):
-              with col[i]:
+              with cols[i]:
                 st.write(f"##### {key}")
                 binary_data = base64.b64decode(data[key]["image"])
                 image_stream = io.BytesIO(binary_data)
