@@ -40,7 +40,7 @@ if file:
 
     if st.button("Start analysis"):
         status_placeholder = st.empty()
-        status_placeholder.text("Please stand by for about ~1m! 8 mighty CPUs are giving their best for you right now. Once processed, the results will show up below.")
+        status_placeholder.text("Please stand by for about ~1m! 8 mighty CPUs are giving their best for you right now ;). Once processed, the results will show up below.")
         image = Image.open(file)
 
         original_width, original_height = image.size
@@ -87,8 +87,12 @@ if file:
             total_items = len(data)
             st.write(f"#### We found {total_items} cells:")
 
+            # for i in classes_count_sorted:
+             # st.write(f"""{i[1]} x {i[0]} ({i[1] / len(classes_count_sorted)} of all cells""")
+
+            bullet_list = ""
             for i in classes_count_sorted:
-             st.write(f"""{i[1]} x {i[0]} ({i[1] / len(classes_count_sorted)} of all cells""")
+              bullet_list += f"{i[1]} x {i[0]} ({i[1] / len(classes_count_sorted)} of all cells\n"
 
             st.write(f"#### Cells in detail:")
             
