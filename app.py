@@ -39,10 +39,10 @@ if file:
         status_placeholder.text("Segmenting in the works ... please stand by.")
         image = Image.open(file)
         buf = io.BytesIO(); image.save(buf, format="JPEG"); buf.seek(0)
-        files_to_send = {"file": ("image.jpg", buf, "image/jpeg")}
+        # files_to_send = {"file": ("image.jpg", buf, "image/jpeg")}
 
         try:
-            r = requests.post(API_URL, files=files_to_send, timeout=600)
+            r = requests.post(API_URL, files={"file": ("image.jpg", buf, "image/jpeg")}, timeout=600)
             r.raise_for_status()
             data = r.json()
             st.write("This is the test output:")
