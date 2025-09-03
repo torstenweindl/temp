@@ -35,88 +35,83 @@ model_list = ['20250826-152119.keras','20250827-141827.keras','20250828-082537.k
 # data_to_send = {"option_1": "no value selected", "option_2": "no value selected", "option_3": "no value selected"}
 st.set_page_config(page_title="Leukemia Predictor", page_icon="🩸", layout="centered")
 st.title("🩸 Leukemia Image Classification (MVP)")
-st.caption("Upload a microscope image → API → prediction")
+st.caption("Upload a blood smear image and have our API classify the different blood cells.")
 file = st.file_uploader("Upload JPG/PNG of a blood smear", type=["png","jpg","jpeg"])
 
 if file:
-
-    if st.button("Start analysis"):
-        status_placeholder = st.empty()
-        status_placeholder.text(f"""Please stand by for about 1 minute.\n8 mighty CPUs are giving their best for you right now! ;) Once processed, the results will show up below.""")
-        image = Image.open(file)
-
-        original_width, original_height = image.size
-        if original_height > 500:
-          image_ratio = original_width / original_height
-          preview_image = image.resize((int(500*image_ratio),500))
-        else:
-          preview_image = image
+  image = Image.open(file)
+  original_width, original_height = image.size
+  if original_height > 500:
+    image_ratio = original_width / original_height
+     preview_image = image.resize((int(500*image_ratio),500))
+  else:
+    preview_image = image
           
-        
-        if image.mode != 'RGB':
-          image = image.convert('RGB')
-        st.image(preview_image, caption="Preview")   # replaced "use_container_width=True"
-        # plt.imshow(image)
-        buf = io.BytesIO(); image.save(buf, format="JPEG"); buf.seek(0)
-        # files_to_send = {"file": ("image.jpg", buf, "image/jpeg")}
+  if image.mode != 'RGB':
+    image = image.convert('RGB')
+    st.image(preview_image, caption="Preview")   # replaced "use_container_width=True"    
+    buf = io.BytesIO(); image.save(buf, format="JPEG"); buf.seek(0)
 
-        try:
-            r = requests.post(API_URL, files={"file": ("image.jpg", buf, "image/jpeg")}, timeout=600)
-            r.raise_for_status()
-            data = r.json()
-            # st.write("This is the test output:")
+  if st.button("Start analysis"):
+    status_placeholder = st.empty()
+    status_placeholder.text(f"""Please stand by for about 1 minute.\n8 mighty CPUs are giving their best for you right now! ;) Once processed, the results will show up below.""")
 
-            class_mapping = {
-            1: 'Basophil',
-            2: 'Erythroblast',
-            3: 'Monocyte',
-            4: 'Myeloblast',
-            5: 'Seg Neutrophil',
-            6: 'Red Blood Cell'
-            }
+    try:
+      r = requests.post(API_URL, files={"file": ("image.jpg", buf, "image/jpeg")}, timeout=600)
+      r.raise_for_status()
+      data = r.json()
 
-            for cell in data:
-              inner_dict = data[cell]
-              original_value = inner_dict['class index']
-              recoded_value = class_mapping.get(original_value, 'Unknown')
-              inner_dict['class index'] = recoded_value
+      class_mapping = {
+      1: 'Basophil',
+      2: 'Erythroblast',
+      3: 'Monocyte',
+      4: 'Myeloblast',
+      5: 'Seg Neutrophil',
+      6: 'Red Blood Cell'
+      }
 
-            classes = [inner_dict['class index'] for inner_dict in data.values()]
-            classes_count = Counter(classes)
-            classes_count_sorted = sorted(classes_count.items(), key=lambda item: item[1], reverse=True)
-            st.write(classes_count_sorted)
+      for cell in data:
+        inner_dict = data[cell]
+        original_value = inner_dict['class index']
+        recoded_value = class_mapping.get(original_value, 'Unknown')
+        inner_dict['class index'] = recoded_value
 
-            total_items = len(data)
-            st.write(f"#### We found {total_items} cells:")
+      classes = [inner_dict['class index'] for inner_dict in data.values()]
+      classes_count = Counter(classes)
+      classes_count_sorted = sorted(classes_count.items(), key=lambda item: item[1], reverse=True)
+      st.write(classes_count_sorted)
 
-            # for i in classes_count_sorted:
-             # st.write(f"""{i[1]} x {i[0]} ({i[1] / len(classes_count_sorted)} of all cells""")
+      total_items = len(data)
+      st.write(f"#### We found {total_items} cells:")
 
-            bullet_list = ""
-            for i in classes_count_sorted:
-              bullet_list += f"- {i[1]} x {i[0]} ({float(i[1]) / total_items * 100:.2f}% of all cells)\n"
-          
-            st.text(bullet_list)
+      # for i in classes_count_sorted:
+       # st.write(f"""{i[1]} x {i[0]} ({i[1] / len(classes_count_sorted)} of all cells""")
 
-            st.write(f"#### Cells in detail:")
-            
-            num_columns = 3
-            data_list = list(data.items())
-            num_rows = math.ceil(total_items / num_columns)
+      bullet_list = ""
+      for i in classes_count_sorted:
+        bullet_list += f"- {i[1]} x {i[0]} ({float(i[1]) / total_items * 100:.2f}% of all cells)\n"
+    
+      st.text(bullet_list)
 
-            for row in range(num_rows):
-              cols = st.columns(num_columns)
-              for col_index in range(num_columns):
-                item_index = row * num_columns + col_index
-                if item_index < total_items:
-                  key, value = data_list[item_index]
-                  with cols[col_index]:
-                    st.write(f"##### {key}")
-                    binary_data = base64.b64decode(value["image"])
-                    image_stream = io.BytesIO(binary_data)
-                    st.image(image_stream)
-                    st.write(f"""**{value["class index"]}**""")
-                    st.write(f"""(certainty: **{value["class index probability"]}**)""")
+      st.write(f"#### Cells in detail:")
+      
+      num_columns = 3
+      data_list = list(data.items())
+      num_rows = math.ceil(total_items / num_columns)
+
+      for row in range(num_rows):
+        cols = st.columns(num_columns)
+        for col_index in range(num_columns):
+          item_index = row * num_columns + col_index
+          if item_index < total_items:
+            key, value = data_list[item_index]
+            with cols[col_index]:
+              st.write(f"##### {key}")
+              binary_data = base64.b64decode(value["image"])
+              image_stream = io.BytesIO(binary_data)
+              st.image(image_stream)
+              st.write(f"""**{value["class index"]}**""")
+              st.write(f"""(certainty: **{value["class index probability"]}**)""")
             
               
                   
@@ -132,7 +127,7 @@ if file:
             # plt.imshow(data[1])
             # plt.show()
 
-        except Exception as e:
-           st.error(f"API error: {e}")
+      except Exception as e:
+         st.error(f"API error: {e}")
 else:
     st.info("Please upload an image to start.")
