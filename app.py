@@ -40,7 +40,7 @@ if file:
 
     if st.button("Start analysis"):
         status_placeholder = st.empty()
-        status_placeholder.text("Please stand by for about ~1m! 8 mighty CPUs are giving their best for you right now ;). Once processed, the results will show up below.")
+        status_placeholder.text(f"""Please stand by for about 1m. 8 mighty CPUs are giving their best for you right now! ;) \n Once processed, the results will show up below.""")
         image = Image.open(file)
 
         original_width, original_height = image.size
@@ -92,7 +92,7 @@ if file:
 
             bullet_list = ""
             for i in classes_count_sorted:
-              bullet_list += f"- {i[1]} x {i[0]} ({float(i[1]) / len(classes_count_sorted) * 100:.2f}% of all cells)"
+              bullet_list += f"- {i[1]} x {i[0]} ({float(i[1]) / len(classes_count_sorted) * 100:.2f}% of all cells)\n"
           
             st.text(bullet_list)
 
