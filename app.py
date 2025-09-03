@@ -92,7 +92,7 @@ if file:
 
             bullet_list = ""
             for i in classes_count_sorted:
-              bullet_list += f"- {i[1]} x {i[0]} ({float(i[1] / len(classes_count_sorted) * 100:.2f}% of all cells)"
+              bullet_list += f"- {i[1]} x {i[0]} ({float(i[1]) / len(classes_count_sorted) * 100:.2f}% of all cells)"
           
             st.text(bullet_list)
 
