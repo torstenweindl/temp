@@ -77,14 +77,26 @@ if file:
               recoded_value = class_mapping.get(original_value, 'Unknown')
               inner_dict['class index'] = recoded_value
 
-            st.write(f"#### Analysis Results")
-          
-            for cell in data:
-              st.write(f"##### {cell}")
-              binary_data = base64.b64decode(data[cell]["image"])
-              image_stream = io.BytesIO(binary_data)
-              st.image(image_stream)
-              st.write(f"""**{data[cell]["class index"]}** (certainty: **{data[cell]["class index probability"]}**)""")
+            st.write(f"#### Here's what we found:")
+
+            cols = st.columns(3)
+
+            for i, (key, value) in enumerate(data.items()):
+              with col[i]:
+                st.write(f"##### {key}")
+                binary_data = base64.b64decode(data[key]["image"])
+                image_stream = io.BytesIO(binary_data)
+                st.image(image_stream)
+                st.write(f"""**{data[key]["class index"]}** (certainty: **{data[key]["class index probability"]}**)""")
+            
+              
+                  
+            # for cell in data:
+            #   st.write(f"##### {cell}")
+            #   binary_data = base64.b64decode(data[cell]["image"])
+            #   image_stream = io.BytesIO(binary_data)
+            #   st.image(image_stream)
+            #   st.write(f"""**{data[cell]["class index"]}** (certainty: **{data[cell]["class index probability"]}**)""")
 
           
             # st.write(data)
