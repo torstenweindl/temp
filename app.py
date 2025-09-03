@@ -40,16 +40,16 @@ if file:
         image = Image.open(file)
 
         original_width, original_height = image.size
-        # if original_height > 500:
-        #   image_ratio = original_width / original_height
-        #   preview_image = image.resize((int(500*image_ratio),500))
-        # else:
-        preview_image = image
+        if original_height > 500:
+          image_ratio = original_width / original_height
+          preview_image = image.resize((int(500*image_ratio),500))
+        else:
+          preview_image = image
           
         
         if image.mode is not 'RGB':
           image = image.convert('RGB')
-        st.image(preview_image, caption="Preview", use_container_width=True)   # replaced "use_container_width=True"
+        st.image(preview_image, caption="Preview")   # replaced "use_container_width=True"
         # plt.imshow(image)
         buf = io.BytesIO(); image.save(buf, format="JPEG"); buf.seek(0)
         # files_to_send = {"file": ("image.jpg", buf, "image/jpeg")}
