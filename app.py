@@ -22,11 +22,24 @@ import matplotlib.image as mpimg
 #     menu_items={}
 # )
 
+# JavaScript + CSS, um die Fußleiste auszublenden
 hide_footer = """
     <style>
-    .st-emotion-cache-h5rgaw {display: none;} /* Footer-Leiste */
-    .st-emotion-cache-12fmjuu {display: none;} /* ggf. "Deploy" Button */
+        /* sicherheitshalber: falls 'footer' Tag existiert */
+        footer {visibility: hidden;}
     </style>
+    <script>
+        // Warte bis DOM fertig ist, dann entferne den Footer-Container
+        window.addEventListener('load', function() {
+            // alle Divs durchgehen und nach 'Made with Streamlit' suchen
+            const elements = Array.from(document.querySelectorAll('div'));
+            elements.forEach(el => {
+                if (el.innerText && el.innerText.includes('Made with Streamlit')) {
+                    el.style.display = 'none';
+                }
+            });
+        });
+    </script>
 """
 st.markdown(hide_footer, unsafe_allow_html=True)
 
