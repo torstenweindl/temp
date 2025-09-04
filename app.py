@@ -22,12 +22,7 @@ st.set_page_config(
     menu_items={}
 )
 
-hide_streamlit_style = """
-    <style>
-    footer {visibility: hidden;}
-    </style>
-"""
-st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+st.markdown("<style>footer {visibility: hidden;}</style>", unsafe_allow_html=True)
 
 # API_URL = st.secrets["API_URL"]    # API_URL stored in a local "secrets" file; in production, API_URL will be stored in Streamlit's secrets section in the web interface
 # API_URL = 'http://127.0.0.1:8000/segment/'  # API URL hardcoded to the local server for the time being
