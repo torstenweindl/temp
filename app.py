@@ -115,12 +115,16 @@ if file:
 		
       dict_wo_rbc = {key: values for key, values in data.items() if values['class index'] != "Red Blood Cell"}
       dict_rbc = {key: values for key, values in data.items() if values['class index'] == "Red Blood Cell"}
+	  
+	  confidence_order = sorted(dict_wo_rbc.items(), key=lambda item: item[1]['class index probability'], reverse=True)
+	  dict_wo_rbc_by_confidence = {key: value for key, value in sorted_items}
+		
       total_items_wo_rbc = len(dict_wo_rbc)
       total_items_rbc = len(dict_rbc)
 
 	  # Table with 'interesting' blood cells
       num_columns_wo_rbc = 3
-      data_list_wo_rbc = list(dict_wo_rbc.items())
+      data_list_wo_rbc = list(dict_wo_rbc_by_confidence.items())
       num_rows_wo_rbc = math.ceil(total_items_wo_rbc / num_columns_wo_rbc)
 
       for row in range(num_rows_wo_rbc):
