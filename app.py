@@ -99,7 +99,7 @@ if file:
       if myeloblast_count > 1:
         st.error(f"We found {myeloblast_count} Myeloblast cell(s), which can indicate blood cancer.")
       else:
-        st.write(f"We found no Myeloblast cells, so no indication for blood cancer.")
+        st.write(f"We found no Myeloblast cells, thus no indication for blood cancer.")
 
       st.write(f"#### Cells in detail:")
       
