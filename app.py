@@ -55,7 +55,7 @@ if file:
 
   if st.button("Start detection"):
     status_placeholder = st.empty()
-    status_placeholder.text(f"""8 mighty CPUs are digging into it right now ;) - please stand by for about 1 minute.\nOnce processed, the results will be shown below.""")
+    status_placeholder.text(f"""8 mighty CPUs are digging into it right now ;) - please stand by for about 1 minute (maybe a little more for heavy images).\nOnce processed, the results will be shown below.""")
 
     try:
       r = requests.post(API_URL, files={"file": ("image.jpg", buf, "image/jpeg")}, timeout=600)
