@@ -53,7 +53,7 @@ if file:
     preview_image = image
   st.image(preview_image, caption="Preview")    # replaced "use_container_width=True"   
 
-  if st.button("Start analysis"):
+  if st.button("Start detection"):
     status_placeholder = st.empty()
     status_placeholder.text(f"""8 mighty CPUs are digging into it right now ;) - please stand by for about 1 minute.\nOnce processed, the results will be shown below.""")
 
