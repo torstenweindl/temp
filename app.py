@@ -97,7 +97,7 @@ if file:
       for i in classes_count_sorted:
         bullet_list += f"- <b>{i[1]} x {i[0]}</b> ({float(i[1]) / total_items * 100:.2f}% of all cells)<br>"
     
-      st.markdown(f"###### {bullet_list}", unsafe_allow_html=True)
+      st.markdown(f"<span style='font-size:1.2em;'> {bullet_list}", unsafe_allow_html=True)
 
       myeloblast_count = 0
       for cell_data in data.values():
@@ -109,7 +109,7 @@ if file:
       else:
         st.write(f"No direct indication for blood cancer from this blood smear.")
 
-      st.markdown("<br><br>", unsafe_allow_html=True)		
+      st.markdown("<br>", unsafe_allow_html=True)		
 
       st.write(f"#### Blood cell types in focus:")
 		
