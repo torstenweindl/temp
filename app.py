@@ -116,7 +116,7 @@ if file:
       dict_wo_rbc = {key: values for key, values in data.items() if values['class index'] != "Red Blood Cell"}
       dict_rbc = {key: values for key, values in data.items() if values['class index'] == "Red Blood Cell"}
 	  
-	  confidence_order = sorted(dict_wo_rbc.items(), key=lambda item: item[1]['class index probability'], reverse=True)
+      confidence_order = sorted(dict_wo_rbc.items(), key=lambda item: item[1]['class index probability'], reverse=True)
 	  dict_wo_rbc_by_confidence = {key: value for key, value in sorted_items}
 		
       total_items_wo_rbc = len(dict_wo_rbc)
