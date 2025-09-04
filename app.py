@@ -135,7 +135,7 @@ if file:
               st.write(f"""**{value["class index"]}**""")
               st.write(f"""(confidence: **{value["class index probability"]}**)""")
 
-	  st.write(f"#### Regular red blood cells:")
+      st.write(f"#### Regular red blood cells:")
 			
 	  # Table with red blood cells
       num_columns_rbc = 3
