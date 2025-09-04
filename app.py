@@ -35,6 +35,7 @@ model_list = ['20250826-152119.keras','20250827-141827.keras','20250828-082537.k
 # data_to_send = {"option_1": "no value selected", "option_2": "no value selected", "option_3": "no value selected"}
 st.set_page_config(page_title="Leukemia Predictor", page_icon="🩸", layout="centered")
 st.title("🩸 Leukemia Image Classification (MVP)")
+st.caption("L.-P. Abensour, Z. Awad, L. Bird, M. Sarateanu, T. Weindl")
 st.caption("Upload a blood smear image and have our API classify the different blood cells. **Please don't use B/W images, as model was trained on color images.**")
 file = st.file_uploader("Upload JPG/PNG of a blood smear", type=["png","jpg","jpeg"])
 
