@@ -16,7 +16,7 @@ import matplotlib.image as mpimg
 
 # API_URL = st.secrets["API_URL"]    # API_URL stored in a local "secrets" file; in production, API_URL will be stored in Streamlit's secrets section in the web interface
 # API_URL = 'http://127.0.0.1:8000/segment/'  # API URL hardcoded to the local server for the time being
-API_URL = st.secrets['API_URL_AUGMENT']
+API_URL_AUGMENT = st.secrets['API_URL_AUGMENT']
 BUCKET_NAME = st.secrets['BUCKET_NAME']
 # GCP_PROJECT = st.secrets['GCP_PROJECT']
 
@@ -58,7 +58,7 @@ if file:
     status_placeholder.text(f"""8 mighty CPUs are digging into it right now ;) - please stand by for about 1 minute (maybe a little more for heavy images).\nOnce processed, the results will be shown below.""")
 
     try:
-      r = requests.post(API_URL, files={"file": ("image.jpg", buf, "image/jpeg")}, timeout=600)
+      r = requests.post(API_URL_AUGMENT, files={"file": ("image.jpg", buf, "image/jpeg")}, timeout=600)
       r.raise_for_status()
       status_placeholder.text(f"Done.")
       data = r.json()
