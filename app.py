@@ -111,8 +111,7 @@ if file:
 
       st.markdown("<br>", unsafe_allow_html=True)		
 
-      st.markdown(f"#### Blood cell types in focus:", unsafe_allow_html=True)
-      st.write("(in descending order of detection confidence)")
+      st.markdown(f"#### Blood cell types in focus:<span style='font-size:0.7em;'><br>(in descending order of detection confidence)", unsafe_allow_html=True)
 
 		
       dict_wo_rbc = {key: values for key, values in data.items() if values['class index'] != "Red Blood Cell"}
@@ -143,7 +142,8 @@ if file:
               st.write(f"""**{value["class index"]}**""")
               st.write(f"""(confidence: **{value["class index probability"]}**)""")
 
-      st.write(f"#### Regular red blood cells:")
+      st.markdown("<br>", unsafe_allow_html=True)
+	  st.write(f"#### Regular red blood cells:")
 			
 	  # Table with red blood cells
       num_columns_rbc = 3
