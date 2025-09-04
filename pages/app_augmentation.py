@@ -14,9 +14,17 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
+st.set_page_config(
+    page_title="Leukemia Image Classification (MVP)",
+    page_icon="🩸",
+    # layout="wide",
+    initial_sidebar_state="collapsed",
+    # menu_items={}
+)
+
 # API_URL = st.secrets["API_URL"]    # API_URL stored in a local "secrets" file; in production, API_URL will be stored in Streamlit's secrets section in the web interface
 # API_URL = 'http://127.0.0.1:8000/segment/'  # API URL hardcoded to the local server for the time being
-API_URL_AUGMENT = st.secrets['API_URL_AUGMENT']
+API_URL = st.secrets['API_URL_TEST']
 BUCKET_NAME = st.secrets['BUCKET_NAME']
 # GCP_PROJECT = st.secrets['GCP_PROJECT']
 
@@ -58,7 +66,7 @@ if file:
     status_placeholder.text(f"""8 mighty CPUs are digging into it right now ;) - please stand by for about 1 minute (maybe a little more for heavy images).\nOnce processed, the results will be shown below.""")
 
     try:
-      r = requests.post(API_URL_AUGMENT, files={"file": ("image.jpg", buf, "image/jpeg")}, timeout=600)
+      r = requests.post(API_URL, files={"file": ("image.jpg", buf, "image/jpeg")}, timeout=600)
       r.raise_for_status()
       status_placeholder.text(f"Done.")
       data = r.json()
@@ -87,30 +95,70 @@ if file:
 
       bullet_list = ""
       for i in classes_count_sorted:
-        bullet_list += f"- {i[1]} x {i[0]} ({float(i[1]) / total_items * 100:.2f}% of all cells)\n"
+        bullet_list += f"- <b>{i[1]} x {i[0]}</b> ({float(i[1]) / total_items * 100:.2f}% of all cells)<br>"
     
-      st.text(f"""###### {bullet_list)""")
-      st.write(f"#### Cells in detail:")
-      
-      num_columns = 3
-      data_list = list(data.items())
-      num_rows = math.ceil(total_items / num_columns)
+      st.markdown(f"<span style='font-size:1.2em;'> {bullet_list}", unsafe_allow_html=True)
 
-      for row in range(num_rows):
-        cols = st.columns(num_columns)
-        for col_index in range(num_columns):
-          item_index = row * num_columns + col_index
-          if item_index < total_items:
-            key, value = data_list[item_index]
-            with cols[col_index]:
+      myeloblast_count = 0
+      for cell_data in data.values():
+        if cell_data.get('class index') == 'Myeloblast':
+          myeloblast_count += 1
+
+      if myeloblast_count > 1:
+        st.markdown("<span style='color:red; font-size:1.3em;'><b>" + str(myeloblast_count) + " Myeloblast cell(s) found, which can indicate blood cancer.</b>", unsafe_allow_html=True)
+      else:
+        st.write(f"No direct indication for blood cancer from this blood smear.")
+
+      st.markdown("<br>", unsafe_allow_html=True)		
+
+      st.write(f"#### Blood cell types in focus:")
+		
+      dict_wo_rbc = {key: values for key, values in data.items() if values['class index'] != "Red Blood Cell"}
+      dict_rbc = {key: values for key, values in data.items() if values['class index'] == "Red Blood Cell"}
+      total_items_wo_rbc = len(dict_wo_rbc)
+      total_items_rbc = len(dict_rbc)
+
+	  # Table with 'interesting' blood cells
+      num_columns_wo_rbc = 3
+      data_list_wo_rbc = list(dict_wo_rbc.items())
+      num_rows_wo_rbc = math.ceil(total_items_wo_rbc / num_columns_wo_rbc)
+
+      for row in range(num_rows_wo_rbc):
+        cols_wo_rbc = st.columns(num_columns_wo_rbc)
+        for col_index in range(num_columns_wo_rbc):
+          item_index_wo_rbc = row * num_columns_wo_rbc + col_index
+          if item_index_wo_rbc < total_items_wo_rbc:
+            key, value = data_list_wo_rbc[item_index_wo_rbc]
+            with cols_wo_rbc[col_index]:
               st.write(f"##### {key}")
-              binary_data = base64.b64decode(value["image"])
-              image_stream = io.BytesIO(binary_data)
-              st.image(image_stream)
+              binary_data_wo_rbc = base64.b64decode(value["image"])
+              image_stream_wo_rbc = io.BytesIO(binary_data_wo_rbc)
+              st.image(image_stream_wo_rbc)
+              st.write(f"""**{value["class index"]}**""")
+              st.write(f"""(confidence: **{value["class index probability"]}**)""")
+
+      st.write(f"#### Regular red blood cells:")
+			
+	  # Table with red blood cells
+      num_columns_rbc = 3
+      data_list_rbc = list(dict_rbc.items())
+      num_rows_rbc = math.ceil(total_items_rbc / num_columns_rbc)
+
+      for row in range(num_rows_rbc):
+        cols_rbc = st.columns(num_columns_rbc)
+        for col_index in range(num_columns_rbc):
+          item_index_rbc = row * num_columns_rbc + col_index
+          if item_index_rbc < total_items_rbc:
+            key, value = data_list_rbc[item_index_rbc]
+            with cols_rbc[col_index]:
+              st.write(f"##### {key}")
+              binary_data_rbc = base64.b64decode(value["image"])
+              image_stream_rbc = io.BytesIO(binary_data_rbc)
+              st.image(image_stream_rbc)
               st.write(f"""**{value["class index"]}**""")
               st.write(f"""(confidence: **{value["class index probability"]}**)""")
       
-      st.write("")
+      st.markdown("<br><br><br>", unsafe_allow_html=True)
       st.write(f"""**Model used for detection:** {data['Cell 1']['model used']}""")
 
     except Exception as e:
