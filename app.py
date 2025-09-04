@@ -95,7 +95,7 @@ if file:
 
       bullet_list = ""
       for i in classes_count_sorted:
-        bullet_list += f"- {i[1]} x {i[0]} ({float(i[1]) / total_items * 100:.2f}% of all cells)<br>"
+        bullet_list += f"- <b>{i[1]} x {i[0]}</b> ({float(i[1]) / total_items * 100:.2f}% of all cells)<br>"
     
       st.markdown(f"###### {bullet_list}", unsafe_allow_html=True)
 
@@ -105,11 +105,11 @@ if file:
           myeloblast_count += 1
 
       if myeloblast_count > 1:
-        st.error(f"We found {myeloblast_count} Myeloblast cell(s), which can indicate blood cancer.")
+        st.markdown(f"<font color="red"><b>We found {myeloblast_count} Myeloblast cell(s), which can indicate blood cancer.</b>", unsafe_allow_html=True)
       else:
         st.write(f"No direct indication for blood cancer from this blood smear.")
 
-      st.write(f"#### Cell types in focus:")
+      st.write(f"#### Blood cell types in focus:")
 		
       dict_wo_rbc = {key: values for key, values in data.items() if values['class index'] != "Red Blood Cell"}
       dict_rbc = {key: values for key, values in data.items() if values['class index'] == "Red Blood Cell"}
