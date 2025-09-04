@@ -110,11 +110,11 @@ if file:
         st.write(f"No direct indication for blood cancer from this blood smear.")
 
       st.write(f"#### Cells in detail:")
-
-	  dict_wo_rbc = {key: values for key, values in data.items() if data['class index'] != "Red Blood Cell"}
-	  dict_rbc = {key: values for key, values in data.items() if data['class index'] == "Red Blood Cell"}
-	  total_items_wo_rbc = len(dict_wo_rbc)
-	  total_items_rbc = len(dict_rbc)
+        
+      dict_wo_rbc = {key: values for key, values in data.items() if data['class index'] != "Red Blood Cell"}
+      dict_rbc = {key: values for key, values in data.items() if data['class index'] == "Red Blood Cell"}
+      total_items_wo_rbc = len(dict_wo_rbc)
+      total_items_rbc = len(dict_rbc)
 
 	  # Table with 'interesting' blood cells
       num_columns_wo_rbc = 3
