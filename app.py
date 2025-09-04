@@ -89,7 +89,7 @@ if file:
       for i in classes_count_sorted:
         bullet_list += f"- {i[1]} x {i[0]} ({float(i[1]) / total_items * 100:.2f}% of all cells)<br>"
     
-      st.markdown(f"##### {bullet_list}", unsafe_allow_html=True)
+      st.markdown(f"###### {bullet_list}", unsafe_allow_html=True)
 
       myeloblast_count = 0
       for cell_data in data.values():
@@ -97,7 +97,7 @@ if file:
           myeloblast_count += 1
 
       if myeloblast_count > 1:
-        st.error(f"""<div style="font-size: 20px;">We found {myeloblast_count} Myeloblast cell(s), which can indicate blood cancer.""", unsafe_allow_html=True)
+        st.error("We found {myeloblast_count} Myeloblast cell(s), which can indicate blood cancer.")
       else:
         st.write(f"We found no Myeloblast cells, so no indication for blood cancer.")
 
