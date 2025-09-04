@@ -89,20 +89,7 @@ if file:
       for i in classes_count_sorted:
         bullet_list += f"- {i[1]} x {i[0]} ({float(i[1]) / total_items * 100:.2f}% of all cells)\n"
     
-      st.text(f"""##### {bullet_list)""")
-
-      myeloblast_count = 0
-      for cell_data in data.values():
-        if cell_data.get('class index') == 'Myeloblast':
-          myeloblast_count += 1
-
-      if myeloblast_count > 1:
-        st.text(f"""##### We found {myeloblast_count) Myeloblast cell(s), which can indicate blood cancer.""")
-      else:
-        st.text(f"""##### We found no Myeloblast cells, so no indication for blood cancer.""")
-      
-      
-
+      st.text(f"""###### {bullet_list)""")
       st.write(f"#### Cells in detail:")
       
       num_columns = 3
