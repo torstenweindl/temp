@@ -14,22 +14,13 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
-# st.set_page_config(
-#     page_title="Leukemia Image Classification (MVP)",
-#     page_icon="🩸",
-#     # layout="wide",
-#     initial_sidebar_state="collapsed",
-#     menu_items={}
-# )
-
-hide_footer = """
-    <style>
-    [data-testid="stDecoration"] {display: none;}   /* obere Leiste */
-    [data-testid="stStatusWidget"] {display: none;} /* Fußleiste unten */
-    footer {visibility: hidden;}                   /* Fallback */
-    </style>
-"""
-st.markdown(hide_footer, unsafe_allow_html=True)
+st.set_page_config(
+    page_title="Leukemia Image Classification (MVP)",
+    page_icon="🩸",
+    # layout="wide",
+    initial_sidebar_state="collapsed",
+    # menu_items={}
+)
 
 # API_URL = st.secrets["API_URL"]    # API_URL stored in a local "secrets" file; in production, API_URL will be stored in Streamlit's secrets section in the web interface
 # API_URL = 'http://127.0.0.1:8000/segment/'  # API URL hardcoded to the local server for the time being
