@@ -110,22 +110,47 @@ if file:
         st.write(f"No direct indication for blood cancer from this blood smear.")
 
       st.write(f"#### Cells in detail:")
-      
-      num_columns = 3
-      data_list = list(data.items())
-      num_rows = math.ceil(total_items / num_columns)
 
-      for row in range(num_rows):
-        cols = st.columns(num_columns)
-        for col_index in range(num_columns):
-          item_index = row * num_columns + col_index
-          if item_index < total_items:
-            key, value = data_list[item_index]
-            with cols[col_index]:
+	  dict_wo_rbc = {key: values for key, values in data.items() if data['class index'] != "Red Blood Cell"}
+	  dict_rbc = {key: values for key, values in data.items() if data['class index'] == "Red Blood Cell"}
+	  total_items_wo_rbc = len(dict_wo_rbc)
+	  total_items_rbc = len(dict_rbc)
+
+	  # Table with 'interesting' blood cells
+      num_columns_wo_rbc = 3
+      data_list_wo_rbc = list(dict_wo_rbc.items())
+      num_rows_wo_rbc = math.ceil(total_items_wo_rbc / num_columns_wo_rbc)
+
+      for row in range(num_rows_wo_rbc):
+        cols_wo_rbc = st.columns(num_columns_wo_rbc)
+        for col_index in range(num_columns_wo_rbc):
+          item_index_wo_rbc = row * num_columns_wo_rbc + col_index
+          if item_index_wo_rbc < total_items_wo_rbc:
+            key, value = data_list_wo_rbc[item_index_wo_rbc]
+            with cols_wo_rbc[col_index]:
               st.write(f"##### {key}")
-              binary_data = base64.b64decode(value["image"])
-              image_stream = io.BytesIO(binary_data)
-              st.image(image_stream)
+              binary_data_wo_rbc = base64.b64decode(value["image"])
+              image_stream_wo_rbc = io.BytesIO(binary_data_wo_rbc)
+              st.image(image_stream_wo_rbc)
+              st.write(f"""**{value["class index"]}**""")
+              st.write(f"""(confidence: **{value["class index probability"]}**)""")
+
+	  # Table with red blood cells
+      num_columns_rbc = 3
+      data_list_rbc = list(dict_rbc.items())
+      num_rows_rbc = math.ceil(total_items_rbc / num_columns_rbc)
+
+      for row in range(num_rows_rbc):
+        cols_rbc = st.columns(num_columns_rbc)
+        for col_index in range(num_columns_rbc):
+          item_index_rbc = row * num_columns_rbc + col_index
+          if item_index_rbc < total_items_rbc:
+            key, value = data_list_rbc[item_index_rbc]
+            with cols_rbc[col_index]:
+              st.write(f"##### {key}")
+              binary_data_rbc = base64.b64decode(value["image"])
+              image_stream_rbc = io.BytesIO(binary_data_rbc)
+              st.image(image_stream_rbc)
               st.write(f"""**{value["class index"]}**""")
               st.write(f"""(confidence: **{value["class index probability"]}**)""")
       
