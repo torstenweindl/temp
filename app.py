@@ -105,7 +105,7 @@ if file:
           myeloblast_count += 1
 
       if myeloblast_count > 1:
-        st.markdown("<span style='color:red;'><b>We found {myeloblast_count} Myeloblast cell(s), which can indicate blood cancer.</b>", unsafe_allow_html=True)
+        st.markdown("<span style='color:red;'><b>We found" + myeloblast_count + "Myeloblast cell(s), which can indicate blood cancer.</b>", unsafe_allow_html=True)
       else:
         st.write(f"No direct indication for blood cancer from this blood smear.")
 
