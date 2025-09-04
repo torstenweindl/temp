@@ -105,9 +105,11 @@ if file:
           myeloblast_count += 1
 
       if myeloblast_count > 1:
-        st.markdown("<span style='color:red;'><b>We found" + str(myeloblast_count) + "Myeloblast cell(s), which can indicate blood cancer.</b>", unsafe_allow_html=True)
+        st.markdown("<span style='color:red; font-size:1.3em;'><b>We found " + str(myeloblast_count) + " Myeloblast cell(s), which can indicate blood cancer.</b>", unsafe_allow_html=True)
       else:
         st.write(f"No direct indication for blood cancer from this blood smear.")
+
+      st.markdown("<br><br>", unsafe_allow_html=True)		
 
       st.write(f"#### Blood cell types in focus:")
 		
@@ -156,7 +158,7 @@ if file:
               st.write(f"""**{value["class index"]}**""")
               st.write(f"""(confidence: **{value["class index probability"]}**)""")
       
-      st.write("")
+      st.markdown("<br><br><br>", unsafe_allow_html=True)
       st.write(f"""**Model used for detection:** {data['Cell 1']['model used']}""")
 
     except Exception as e:
