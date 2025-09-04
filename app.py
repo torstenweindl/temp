@@ -14,13 +14,13 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
-st.set_page_config(
-    page_title="Leukemia Image Classification (MVP)",
-    page_icon="🩸",
-    # layout="wide",
-    initial_sidebar_state="collapsed",
-    menu_items={}
-)
+# st.set_page_config(
+#     page_title="Leukemia Image Classification (MVP)",
+#     page_icon="🩸",
+#     # layout="wide",
+#     initial_sidebar_state="collapsed",
+#     menu_items={}
+# )
 
 st.markdown("<style>footer {visibility: hidden;}</style>", unsafe_allow_html=True)
 
