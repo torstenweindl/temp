@@ -111,7 +111,9 @@ if file:
 
       st.markdown("<br>", unsafe_allow_html=True)		
 
-      st.markdown(f"#### Blood cell types in focus:<span style='font-size:0.7em;'><br>(in descending order of detection confidence)", unsafe_allow_html=True)
+      st.markdown(f"#### Blood cell types in focus:", unsafe_allow_html=True)
+      st.write("(in descending order of detection confidence)")
+
 		
       dict_wo_rbc = {key: values for key, values in data.items() if values['class index'] != "Red Blood Cell"}
       dict_rbc = {key: values for key, values in data.items() if values['class index'] == "Red Blood Cell"}
