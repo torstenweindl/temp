@@ -143,7 +143,7 @@ if file:
               st.write(f"""(confidence: **{value["class index probability"]}**)""")
 
       st.markdown("<br>", unsafe_allow_html=True)
-	  st.write(f"#### Regular red blood cells:")
+      st.write(f"#### Regular red blood cells:")
 			
 	  # Table with red blood cells
       num_columns_rbc = 3
