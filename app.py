@@ -68,7 +68,7 @@ if file:
     try:
       r = requests.post(API_URL, files={"file": ("image.jpg", buf, "image/jpeg")}, timeout=600)
       r.raise_for_status()
-      status_placeholder.text(f"Done.")
+      status_placeholder.text(f"Detection done.")
       data = r.json()
 
       class_mapping = {
