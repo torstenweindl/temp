@@ -109,7 +109,7 @@ if file:
       else:
         st.write(f"No direct indication for blood cancer from this blood smear.")
 
-      st.write(f"#### Cells in detail:")
+      st.write(f"#### Cell types in focus:")
 		
       dict_wo_rbc = {key: values for key, values in data.items() if values['class index'] != "Red Blood Cell"}
       dict_rbc = {key: values for key, values in data.items() if values['class index'] == "Red Blood Cell"}
@@ -135,6 +135,8 @@ if file:
               st.write(f"""**{value["class index"]}**""")
               st.write(f"""(confidence: **{value["class index probability"]}**)""")
 
+	  st.write(f"#### Regular red blood cells:")
+			
 	  # Table with red blood cells
       num_columns_rbc = 3
       data_list_rbc = list(dict_rbc.items())
