@@ -1,2 +1,2 @@
 # temp
-Just am temp repo for Selen-Imaging
+Temp repository for Selen Imaging demo
