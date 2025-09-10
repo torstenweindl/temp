@@ -20,6 +20,12 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
+st.set_page_config(
+    page_title="Leukemia Image Classification (MVP)",
+    page_icon="🩸",
+    initial_sidebar_state="collapsed",
+)
+
 API_URL = st.secrets['API_URL_EXTENDED']
 
 ### Hard-coded list of our Deep Learning models (can be used for a drop-down, for example)
