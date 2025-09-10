@@ -22,8 +22,7 @@ import matplotlib.image as mpimg
 
 st.set_page_config(
     page_title="Leukemia Image Classification (MVP)",
-    page_icon="🩸",
-    initial_sidebar_state="collapsed",
+    page_icon="🩸"
 )
 
 API_URL = st.secrets['API_URL_EXTENDED']
