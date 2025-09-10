@@ -20,12 +20,6 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
-st.set_page_config(
-    page_title="Leukemia Image Classification (MVP)",
-    page_icon="🩸",
-    initial_sidebar_state="collapsed",
-)
-
 API_URL = st.secrets['API_URL_EXTENDED']
 
 ### Hard-coded list of our Deep Learning models (can be used for a drop-down, for example)
@@ -46,7 +40,6 @@ API_URL = st.secrets['API_URL_EXTENDED']
 # data_to_send = {"option": selected_model}
 ###
 
-st.set_page_config(page_title="Leukemia Image Classification (MVP)", page_icon="🩸", layout="centered")
 st.title("🩸 Leukemia Image Classification (MVP)")
 st.caption("L.-P. Abensour, Z. Awad, L. Bird, M. Sarateanu, T. Weindl")
 st.caption("Upload a blood smear image and have our API classify the different blood cells. **Please don't use B/W images, as model was trained on color images.**")
