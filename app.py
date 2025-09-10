@@ -1,6 +1,8 @@
-### Please note: Our project's streamlit site (https://selen-imaging-demo.streamlit.app/) is not fed from this file, but from
-### an identical one in the repo https://github.com/torstenweindl/temp. The Streamlit setup requires admin rights for the
-### GitHub repository which it is based on, which only MS had for the main project repo https://github.com/MaraSara96/Selen_Imaging).
+### Please note: Our project's streamlit site (https://selen-imaging-demo.streamlit.app/) is not fed from our project repository
+### (https://github.com/MaraSara96/Selen_Imaging), but from this file (repo https://github.com/torstenweindl/temp).
+### Reason: the Streamlit setup requires admin rights for the GitHub repository which it is based on, which only MS had for the
+### main project repo https://github.com/MaraSara96/Selen_Imaging). Therefore the code files were mirrored into this
+### repo (https://github.com/torstenweindl/temp).
 
 import os
 import streamlit as st
