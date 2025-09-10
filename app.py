@@ -1,3 +1,5 @@
+# THIS WAS A PREVIOUS FILE - DO NOT USE ANYMORE
+
 ### Please note: Our project's streamlit site (https://selen-imaging-demo.streamlit.app/) is not fed from our project repository
 ### (https://github.com/MaraSara96/Selen_Imaging), but from this file (repo https://github.com/torstenweindl/temp).
 ### Reason: the Streamlit setup requires admin rights for the GitHub repository which it is based on, which only MS had for the
