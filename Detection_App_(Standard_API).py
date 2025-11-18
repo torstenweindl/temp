@@ -46,7 +46,7 @@ API_URL = st.secrets['API_URL']
 # data_to_send = {"option": selected_model}
 ###
 
-st.caption(
+st.header(
     "<span style='color:red; font-size: 50px;'>PLEASE NOTE: This project is currently 'asleep', i.e. you'll get an error message when you upload images for detection.</span>",
     unsafe_allow_html=True
 )
