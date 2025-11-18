@@ -47,7 +47,7 @@ API_URL = st.secrets['API_URL']
 ###
 
 st.write(
-    "<span style='color:red'>PLEASE NOTE: This project is currently 'asleep', i.e. you'll get an error message when you upload images for detection.</span>",
+    "<span style='color:red'>PLEASE NOTE: This project is currently 'asleep', i.e. you'll get an error message when you upload images for detection. If you want to try it out, please get in touch with one of the project owners listed below.</span>",
     unsafe_allow_html=True
 )
 st.title("🩸 Leukemia Image Classification (MVP)")
