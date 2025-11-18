@@ -46,6 +46,7 @@ API_URL = st.secrets['API_URL']
 # data_to_send = {"option": selected_model}
 ###
 
+st.title("PLEASE NOTE: This project is currently 'asleep', i.e. you'll get an error message when you upload images for detection.")
 st.title("🩸 Leukemia Image Classification (MVP)")
 st.caption("L.-P. Abensour, Z. Awad, L. Bird, M. Sarateanu, T. Weindl")
 st.caption("Upload a blood smear image and have our API classify the different blood cells. **Please don't use B/W images, as model was trained on color images.**")
